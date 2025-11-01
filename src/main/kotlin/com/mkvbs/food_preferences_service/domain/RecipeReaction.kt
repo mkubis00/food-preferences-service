@@ -1,6 +1,6 @@
 package com.mkvbs.food_preferences_service.domain
 
-import java.time.LocalDateTime
+import java.time.OffsetDateTime
 import java.util.*
 
 open class RecipeReaction(
@@ -8,5 +8,5 @@ open class RecipeReaction(
     val userId: UUID,
     val recipeId: UUID,
     val isLiked: Boolean,
-    val reactedAt: LocalDateTime?,
+    var reactedAt: OffsetDateTime?,
 )

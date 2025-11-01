@@ -13,5 +13,5 @@ fun RecipeReaction.toEntity(): RecipeReactionEntity {
 fun RecipeReaction.toResponse(): RecipeReactionResponseDto {
     if (id == null) throw ResourceIdNullException("ID of recipe reaction can not be null")
     if (reactedAt == null) throw ResourceAttributeNullException("Attribute reactedAt for recipe reaction with ID '$id' can not be null")
-    return RecipeReactionResponseDto(id, userId, recipeId, isLiked, reactedAt)
+    return RecipeReactionResponseDto(id, userId, recipeId, isLiked, reactedAt!!)
 }
