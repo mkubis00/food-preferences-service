@@ -1,8 +1,7 @@
 package com.mkvbs.food_preferences_service.dto.ingredientReaction
 
 import io.swagger.v3.oas.annotations.media.Schema
-import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Schema(
     name= "IngredientReaction",
@@ -10,7 +9,7 @@ import java.util.UUID
 )
 data class IngredientReactionDto(
     @field:Schema(
-        description = "UUID of the ingredient reaction, should not be included during creation of the ingredient",
+        description = "UUID of the ingredient reaction, should not be included during creation of the ingredient reaction",
         example = "3fa85f64-5717-4562-b3fc-2c963f66afa6"
     )
     val id: UUID?,

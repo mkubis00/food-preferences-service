@@ -6,7 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.Id
 import org.hibernate.annotations.CreationTimestamp
 import java.time.LocalDateTime
-import java.util.UUID
+import java.util.*
 
 @Entity(name = "recipe_reaction")
 class RecipeReactionEntity(
@@ -17,5 +17,5 @@ class RecipeReactionEntity(
 
     @CreationTimestamp
     @Column(updatable = false)
-    val reactedAt: LocalDateTime,
+    val reactedAt: LocalDateTime?,
 )
