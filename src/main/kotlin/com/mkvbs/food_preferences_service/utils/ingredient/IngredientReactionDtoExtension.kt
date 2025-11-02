@@ -5,5 +5,6 @@ import com.mkvbs.food_preferences_service.dto.ingredientReaction.IngredientReact
 
 fun IngredientReactionDto.toDomain(): IngredientReaction {
     return IngredientReaction(
-        null, userId, ingredientId, isLiked, null)
+        null, userId, ingredientId, isLiked
+    )
 }
