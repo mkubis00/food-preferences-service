@@ -12,7 +12,7 @@ import org.springframework.boot.runApplication
     info = Info(
         title = "Food Preferences Service",
         version = "0.0.1",
-        description = "Recipe Service API which provides management of recipes and ingredients reactions",
+        description = "Food Preferences Service API which provides management of recipes reactions",
         contact = Contact(
             name = "Maciej Kubis",
             url = "https://github.com/mkvbs/recipe_service",
