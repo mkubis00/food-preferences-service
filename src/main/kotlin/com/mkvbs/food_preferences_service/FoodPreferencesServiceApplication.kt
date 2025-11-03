@@ -11,7 +11,7 @@ import org.springframework.boot.runApplication
 @OpenAPIDefinition( // TO CHANGE
     info = Info(
         title = "Food Preferences Service",
-        version = "0.0.1",
+        version = "1.0.0",
         description = "Food Preferences Service API which provides management of recipes reactions",
         contact = Contact(
             name = "Maciej Kubis",

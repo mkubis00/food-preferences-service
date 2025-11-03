@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.mkvbs"
-version = "0.0.1-SNAPSHOT"
+version = "1.0.0"
 description = "Micro-service written in Kotlin that provides information about user preferences of ingredients or recipes"
 
 java {
