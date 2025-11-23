@@ -29,8 +29,8 @@ import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @Tag(
-    name = "TO BE UPDATED",
-    description = "TO BE UPDATED"
+    name = "Ingredient Reactions",
+    description = "API for managing user ingredient reactions such as likes and dislikes."
 )
 @RestController
 @RequestMapping("/api/ingredient-reaction/v1", produces = [MediaType.APPLICATION_JSON_VALUE])
@@ -40,14 +40,19 @@ class IngredientResponseController(
 ) {
 
     @Operation(
-        summary = "TO BE UPDATED",
-        description = "TO BE UPDATED"
+        summary = "Get negative ingredient reactions for a specific user\n",
+        description = "Returns a list of ingredient reactions marked as negative (disliked) for the given user.\n"
     )
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "200", description = "TO BE UPDATED"),
             ApiResponse(
-                responseCode = "500", description = "TO BE UPDATED", content = [Content(
+                responseCode = "200",
+                description = "List of negative ingredient reactions successfully returned.\n"
+            ),
+            ApiResponse(
+                responseCode = "500",
+                description = "Unexpected server error while retrieving ingredient reactions.\n",
+                content = [Content(
                     schema = Schema(
                         implementation = ErrorResponseDto::class
                     )
@@ -86,16 +91,25 @@ class IngredientResponseController(
     }
 
     @Operation(
-        summary = "TO BE UPDATED",
-        description = "TO BE UPDATED"
+        summary = "Create a new ingredient reaction",
+        description = "Creates a new reaction (liked or disliked) for a specific ingredient and user."
     )
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "200", description = "TO BE UPDATED"),
+            ApiResponse(responseCode = "200", description = "Ingredient reaction successfully created."),
             ApiResponse(
                 responseCode = "409",
-                description = "TO BE UPDATED",
+                description = "Conflict — the reaction already exists for this user and ingredient.",
                 content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
+            ),
+            ApiResponse(
+                responseCode = "500",
+                description = "Unexpected server error while creating ingredient reactions.\n",
+                content = [Content(
+                    schema = Schema(
+                        implementation = ErrorResponseDto::class
+                    )
+                )]
             )
         ]
     )
@@ -131,15 +145,15 @@ class IngredientResponseController(
     }
 
     @Operation(
-        summary = "TO BE UPDATED",
-        description = "TO BE UPDATED"
+        summary = "Delete ingredient reactions by IDs\n",
+        description = "Deletes multiple ingredient reactions identified by their UUIDs.\n"
     )
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "204", description = "TO BE UPDATED"),
+            ApiResponse(responseCode = "204", description = "Ingredient reactions successfully deleted.\n"),
             ApiResponse(
                 responseCode = "500",
-                description = "TO BE UPDATED",
+                description = "Unexpected server error while deleting ingredient reactions.\n",
                 content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
             )
         ]
