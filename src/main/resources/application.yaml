@@ -22,3 +22,8 @@ spring:
       hibernate.format_sql: true
       hibernate.jdbc.lob.non_contextual_creation: true
 
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.mkvbs: INFO
