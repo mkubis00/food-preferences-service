@@ -78,7 +78,6 @@ class LoggingHelper {
          *
          * @param controllerClass the class of the controller generating the log; used to bind the logger
          * @param path the fully resolved HTTP endpoint path that produced the response
-         * @param pathVariables a map of path variable names and their values (may be empty)
          * @param status HTTP response status code (e.g., 200, 400, 500)
          * @param durationMs total time in milliseconds it took to process the request
          * @param request the current {@link HttpServletRequest}, used to extract client IP and headers
@@ -86,7 +85,6 @@ class LoggingHelper {
         fun logResponse(
             controllerClass: Class<*>,
             path: String,
-            pathVariables: Map<String, Any?> = emptyMap(),
             status: Int,
             durationMs: Long,
             request: HttpServletRequest
@@ -96,10 +94,8 @@ class LoggingHelper {
             val clientIp = request.remoteAddr ?: "unknown"
             val loggedUserId = request.getHeader("X-User-Id") ?: "anonymous"
 
-            val pathVarsString = if (pathVariables.isNotEmpty()) pathVariables else "{}"
-
             logger.info(
-                "Outgoing response: status=$status, path=$path, pathVariables=$pathVarsString, " +
+                "Outgoing response: status=$status, path=$path, " +
                         "durationMs=${durationMs}ms, clientIp=$clientIp, loggedUserId=$loggedUserId"
             )
         }

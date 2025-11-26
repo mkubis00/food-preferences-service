@@ -33,7 +33,11 @@ class IngredientReactionServiceImpl(
     }
 
     @Transactional
-    override fun deleteIngredientReactionByIds(ids: List<UUID>) {
+    override fun deleteIngredientReactionsByIds(ids: List<UUID>) {
         ingredientReactionRepo.deleteAllById(ids)
+    }
+
+    override fun deleteIngredientReactionById(id: UUID) {
+        ingredientReactionRepo.deleteById(id)
     }
 }

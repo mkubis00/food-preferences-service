@@ -40,8 +40,8 @@ class IngredientResponseController(
 ) {
 
     @Operation(
-        summary = "Get negative ingredient reactions for a specific user\n",
-        description = "Returns a list of ingredient reactions marked as negative (disliked) for the given user.\n"
+        summary = "Get negative ingredient reactions for a specific user",
+        description = "Returns a list of ingredient reactions marked as negative (disliked) for the given user."
     )
     @ApiResponses(
         value = [
@@ -81,7 +81,6 @@ class IngredientResponseController(
         LoggingHelper.logResponse(
             controllerClass = IngredientResponseController::class.java,
             path = "/api/ingredient-reaction/v1/get-negative-ingredients-reaction-for-user/$userId",
-            pathVariables = mapOf("userId" to userId),
             status = response.statusCode.value(),
             durationMs = System.currentTimeMillis() - start,
             request = request
@@ -104,7 +103,7 @@ class IngredientResponseController(
             ),
             ApiResponse(
                 responseCode = "500",
-                description = "Unexpected server error while creating ingredient reactions.\n",
+                description = "Unexpected server error while creating ingredient reactions.",
                 content = [Content(
                     schema = Schema(
                         implementation = ErrorResponseDto::class
@@ -135,7 +134,6 @@ class IngredientResponseController(
         LoggingHelper.logResponse(
             controllerClass = IngredientResponseController::class.java,
             path = "/api/ingredient-reaction/v1/create-ingredient-reaction",
-            pathVariables = mapOf(),
             status = response.statusCode.value(),
             durationMs = System.currentTimeMillis() - start,
             request = request
@@ -145,22 +143,81 @@ class IngredientResponseController(
     }
 
     @Operation(
-        summary = "Delete ingredient reactions by IDs\n",
-        description = "Deletes multiple ingredient reactions identified by their UUIDs.\n"
+        summary = "Delete ingredient reactions by IDs",
+        description = "Deletes multiple ingredient reactions identified by their UUIDs."
     )
     @ApiResponses(
         value = [
-            ApiResponse(responseCode = "204", description = "Ingredient reactions successfully deleted.\n"),
+            ApiResponse(responseCode = "204", description = "Ingredient reactions successfully deleted."),
             ApiResponse(
                 responseCode = "500",
-                description = "Unexpected server error while deleting ingredient reactions.\n",
+                description = "Unexpected server error while deleting ingredient reactions.",
                 content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
             )
         ]
     )
-    @DeleteMapping("remove-ingredient-reactions/{ids}")
-    fun deleteIngredientReactions(@PathVariable ids: List<UUID>): ResponseEntity<Void> {
-        ingredientResponseService.deleteIngredientReactionByIds(ids)
+    @DeleteMapping("remove-ingredients-reactions/{ids}")
+    fun deleteIngredientReactions(@PathVariable ids: List<UUID>, request: HttpServletRequest): ResponseEntity<Void> {
+
+        val start = System.currentTimeMillis()
+
+        LoggingHelper.logRequest(
+            controllerClass = IngredientResponseController::class.java,
+            method = "DELETE",
+            path = "/api/ingredient-reaction/v1/remove-ingredients-reactions",
+            pathVariables = mapOf("IngredientIdToDelete" to ids.toString()),
+            request = request
+        )
+
+        LoggingHelper.logResponse(
+            controllerClass = IngredientResponseController::class.java,
+            path = "/api/ingredient-reaction/v1/remove-ingredients-reactions",
+            status = HttpStatus.NO_CONTENT.value(),
+            durationMs = System.currentTimeMillis() - start,
+            request = request
+        )
+
+        ingredientResponseService.deleteIngredientReactionsByIds(ids)
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
+    }
+
+    @Operation(
+        summary = "Delete ingredient reaction by ID",
+        description = "Deletes ingredient reaction identified by their UUIDs."
+    )
+    @ApiResponses(
+        value = [
+            ApiResponse(responseCode = "204", description = "Ingredient reaction successfully deleted."),
+            ApiResponse(
+                responseCode = "500",
+                description = "Unexpected server error while deleting ingredient reaction.",
+                content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
+            )
+        ]
+    )
+    @DeleteMapping("remove-ingredients-reaction/{ids}")
+    fun deleteIngredientReaction(@PathVariable id: UUID, request: HttpServletRequest): ResponseEntity<Void> {
+
+        val start = System.currentTimeMillis()
+
+        LoggingHelper.logRequest(
+            controllerClass = IngredientResponseController::class.java,
+            method = "DELETE",
+            path = "/api/ingredient-reaction/v1/remove-ingredients-reaction",
+            pathVariables = mapOf("IngredientIdToDelete" to id.toString()),
+            request = request
+        )
+
+        ingredientResponseService.deleteIngredientReactionById(id)
+
+        LoggingHelper.logResponse(
+            controllerClass = IngredientResponseController::class.java,
+            path = "/api/ingredient-reaction/v1/remove-ingredients-reaction",
+            status = HttpStatus.NO_CONTENT.value(),
+            durationMs = System.currentTimeMillis() - start,
+            request = request
+        )
+
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build()
     }
 }

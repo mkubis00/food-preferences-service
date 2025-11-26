@@ -3,6 +3,7 @@ package com.mkvbs.food_preferences_service.service
 import com.mkvbs.food_preferences_service.domain.IngredientReaction
 import java.util.*
 
+
 /**
  * Service interface for managing user reactions to ingredients.
  *
@@ -48,5 +49,15 @@ interface IIngredientReactionService {
      *
      * @param ids a list of UUIDs of the ingredient reactions to be deleted
      */
-    fun deleteIngredientReactionByIds(ids: List<UUID>)
+    fun deleteIngredientReactionsByIds(ids: List<UUID>)
+
+    /**
+     * Deletes ingredient reaction with the given ID.
+     *
+     * This function accepts a UUID representing ingredient reaction
+     * and removes corresponding record from the database.
+     *
+     * @param id a UUID of the ingredient reaction to be deleted
+     */
+    fun deleteIngredientReactionById(id: UUID)
 }
